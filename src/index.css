@@ -9,6 +9,7 @@
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__link/header__link.css);
 
 @import url(./blocks/logo/logo.css);
 
@@ -57,23 +58,34 @@
 @import url(./blocks/popup/__subtitle/popup__subtitle.css);
 
 @import url(./blocks/form/form.css);
+@import url(./blocks/form/_color/form_color_white.css);
 @import url(./blocks/form/_type/form_type_add.css);
 @import url(./blocks/form/_type/form_type_edit.css);
 @import url(./blocks/form/_type/form_type_delete.css);
 @import url(./blocks/form/_type/form_type_edit-avatar.css);
 @import url(./blocks/form/__title/form__title.css);
 @import url(./blocks/form/__title/_place/form__title_place_delete.css);
+@import url(./blocks/form/__title/_place/form__title_place_sign-in.css);
 @import url(./blocks/form/__item/form__item.css);
 @import url(./blocks/form/__item/_type/form__item_type_name.css);
 @import url(./blocks/form/__item/_type/form__item_type_desc.css);
 @import url(./blocks/form/__item/_type/form__item_type_image-subtitle.css);
 @import url(./blocks/form/__item/_type/form__item_type_image-link.css);
 @import url(./blocks/form/__item/_state/form__item_state_invalid.css);
+@import url(./blocks/form/__item/_color/form__item_color_white.css);
 @import url(./blocks/form/__error/form__error.css);
 @import url(./blocks/form/__button/form__button.css);
 @import url(./blocks/form/__button/_disabled/form__button_disabled.css);
 @import url(./blocks/form/__button/_place/form__button_place_new-card.css);
 @import url(./blocks/form/__button/_place/form__button_place_delete.css);
+@import url(./blocks/form/__button/_color/form__button_color_white.css);
+
+@import url(./blocks/sign-in/sign-in.css);
+
+@import url(./blocks/sign-up/sign-up.css);
+@import url(./blocks/sign-up/__container/sign-up__container.css);
+@import url(./blocks/sign-up/__link/sign-up__link.css);
+@import url(./blocks/sign-up/__text/sign-up__text.css);
 
 @import url(./blocks/name-profile-error/name-profile-error.css);
 @import url(./blocks/desc-profile-error/desc-profile-error.css);

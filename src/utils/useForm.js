@@ -27,17 +27,13 @@ export function useForm() {
     setValid(evt.target.closest(".popup__form").checkValidity())
   }
 
-  function handleReset() {
-    setValues({});
-    setErrors({});
-    setValid(false)
-  };
-
   return {
     values,
     errors,
     isValid,
+    setValues,
+    setErrors,
+    setValid,
     handleChange,
-    handleReset
   }
 }

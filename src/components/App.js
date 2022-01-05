@@ -10,6 +10,10 @@ import EditAvatarPopup from './EditAvatarPopup';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import PopupConfirmation from './PopupConfirmation';
+import Login from './Login';
+import Register from './Register';
+import { Route, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 function App() {
 
@@ -26,6 +30,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({}); //стейт текущих данных пользователя
 
   const [cards, setCards] = React.useState([]);//хук состояния карточки 
+
+  const [isLoggedIn, setLoggedIn] = React.useState(false); //стейт, содержащий инф-ию о статусе пользователя
   
   //обработчик открытия попапа редактирования аватара профиля
   function handleEditAvatarClick() {
@@ -139,30 +145,51 @@ function App() {
   return (
     <div className='page__content'>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Switch>
+          <Route exact path='/my-profile'>
 
-        <Main 
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onBtnDelete={handlePopupConfirmationClick}
-        />
+            <Header loggedIn={isLoggedIn}/>
 
-        <Footer />
+            <Main 
+              onEditAvatar={handleEditAvatarClick}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onCardClick={handleCardClick}
+              cards={cards}
+              onCardLike={handleCardLike}
+              onBtnDelete={handlePopupConfirmationClick}
+            />
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} textOfButton='Сохранить'/>
+            <Footer />
 
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} textOfButton='Создать'/>
+            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} textOfButton='Сохранить'/>
 
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} textOfButton='Сохранить' />
+            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} textOfButton='Создать'/>
 
-        <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} textOfButton='Сохранить' />
 
-        <PopupConfirmation isOpen={isPopupConfirmationOpen} onClose={closeAllPopups} card={selectedCard} textOfButton="Да" removeCard={handleCardDelete}/>
+            <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
+            <PopupConfirmation isOpen={isPopupConfirmationOpen} onClose={closeAllPopups} card={selectedCard} textOfButton="Да" removeCard={handleCardDelete}/>
+
+          </Route>
+          <Route path='/sign-up'>
+            <Header loggedIn={isLoggedIn}/>
+            <Register />
+          </Route>
+          <Route path='/sign-in'>
+          <Header loggedIn={!isLoggedIn}/>
+            <Login />
+          </Route>
+          <Route exact path='/'>
+            {isLoggedIn ? <Redirect to="/my-profile"/> : <Redirect to="/sign-in"/> }
+          </Route>
+          <Route path='*'>
+            <div style={{color: "#FF8C00"}}>404</div>
+          </Route>
+        </Switch>
+
+        
       </CurrentUserContext.Provider>
 
     </div>

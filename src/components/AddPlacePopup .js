@@ -6,17 +6,15 @@ function AddPlacePopup(props) {
 
   const [loader, setLoader] = React.useState(props.textOfButton); //начальное значение кнопки
 
-  const {values, errors, isValid, handleChange, handleReset} = useForm();
+  const {values, errors, isValid, handleChange, setValues, setErrors, setValid} = useForm();
   
   //очищаем значение инпутов при монтировании
   React.useEffect(() => {
+    setValid(false)
+    setValues({})
+    setErrors({})
     setLoader(props.textOfButton);
-  }, [props.isOpen, props.textOfButton]);
-
-  function close() {
-    handleReset();
-    props.onClose()
-  }
+  }, [props.isOpen, props.textOfButton, setValues, setErrors, setValid]);
 
   //передаем новые значения инпутов по сабмиту
   function handleSubmit(evt) {
@@ -30,14 +28,12 @@ function AddPlacePopup(props) {
     });
 
     setLoader('Создание...');
-    
-    close()
 
   }
 
   return (
     <>
-      <PopupWithForm name='new-card' title='Новое место' textOfButton='Создать' isOpen={props.isOpen} onClose={close} onSubmit={handleSubmit} button={loader} disabledButton={!isValid}>
+      <PopupWithForm name='new-card' title='Новое место' textOfButton='Создать' isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit} button={loader} disabledButton={!isValid}>
 
         <input className="form__item form__item_type_image-subtitle" id="image-subtitle" type="text" name="subtitle" placeholder="Название" minLength="2" maxLength="30" value={values.subtitle || ''} onChange={handleChange} required />
         <span className="form__error image-subtitle-error">{!isValid && errors.subtitle}</span>

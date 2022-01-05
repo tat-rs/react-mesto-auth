@@ -9,20 +9,15 @@ function EditProfilePopup(props) {
 
   const [loader, setLoader] = React.useState(props.textOfButton); //начальное значение кнопки
 
-
-  const {values, errors, isValid, handleChange, handleReset} = useForm();
+  const {values, errors, isValid, handleChange, setValues, setErrors, setValid} = useForm();
 
   // После загрузки текущего пользователя из API его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
-    values.name = currentUserData.name;
-    values.about = currentUserData.about;
+    setValid(false)
+    setValues({...values, name: currentUserData.name, about: currentUserData.about})
+    setErrors({})
     setLoader(props.textOfButton);
-  }, [currentUserData, props.isOpen, props.textOfButton]); 
-
-  function close() {
-    handleReset();
-    props.onClose()
-  }
+  }, [currentUserData, props.isOpen, props.textOfButton, setValues, setErrors, setValid]); 
 
   //функция обновления данных пользователя по сабмиту
   function handleSubmit(evt) {
@@ -41,7 +36,7 @@ function EditProfilePopup(props) {
 
   return (
     <>
-      <PopupWithForm name='edit' title='Редактировать профиль' textOfButton='Сохранить' isOpen={props.isOpen} onClose={close} onSubmit={handleSubmit} button={loader} disabledButton={!isValid}>
+      <PopupWithForm name='edit' title='Редактировать профиль' textOfButton='Сохранить' isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit} button={loader} disabledButton={!isValid}>
 
         <input className="form__item form__item_type_name" id="name-profile" type="text" name="name" placeholder="Имя" minLength="2" maxLength="40" value={values.name || ''} onChange={handleChange} required />
         <span className="form__error name-profile-error">{!isValid && errors.name}</span>
