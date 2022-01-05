@@ -1,0 +1,17 @@
+.profile__container {
+  width: calc(100% - 150px);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 30px;
+}
+
+@media (max-width: 590px) {
+  .profile__container {
+    padding: 0;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 34px;
+  }
+}

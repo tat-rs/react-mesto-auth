@@ -1,0 +1,32 @@
+.profile__image-edit {
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  border: 0;
+  position: relative;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  margin-right: 30px;
+  background-color: transparent;
+  color: #fff;
+}
+
+.profile__image-edit:hover::after {
+  position: absolute;
+  content: url('../../../images/avatar-edit.svg');
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: .8;
+}
+
+@media (max-width: 590px) {
+  .profile__image-edit {
+    margin: 0 0 22px;
+  }
+}

@@ -1,0 +1,14 @@
+.cards__desc {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 25px 20px 31px 21px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width:590px) {
+  .cards__desc {
+    padding-bottom: 26px;
+  }
+}

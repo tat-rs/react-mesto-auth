@@ -1,0 +1,26 @@
+.logo {
+  display: block;
+  width: 142px;
+  height: 33px;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.logo:hover {
+  opacity: 0.6;
+}
+
+
+@media (max-width: 976px) {
+  .logo {
+    width: 103.74px;
+    height: 24.4px;
+  }
+}
+
+
+@media (max-width: 590px) {
+  .logo {
+    margin: 0 27px;
+  }
+}
