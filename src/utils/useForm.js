@@ -24,7 +24,7 @@ export function useForm() {
       [evt.target.name]: evt.target.validationMessage
     })
 
-    setValid(evt.target.closest(".popup__form").checkValidity())
+    setValid(evt.target.closest(".form").checkValidity())
   }
 
   return {

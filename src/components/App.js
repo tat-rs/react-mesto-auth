@@ -12,6 +12,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import PopupConfirmation from './PopupConfirmation';
 import Login from './Login';
 import Register from './Register';
+import InfoToolTip from './InfoTooltip';
 import { Route, Switch } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
@@ -32,6 +33,8 @@ function App() {
   const [cards, setCards] = React.useState([]);//хук состояния карточки 
 
   const [isLoggedIn, setLoggedIn] = React.useState(false); //стейт, содержащий инф-ию о статусе пользователя
+
+  const [isSuccess, setSuccess] = React.useState(false); //стейт попапа с успешной авторизацией
   
   //обработчик открытия попапа редактирования аватара профиля
   function handleEditAvatarClick() {
@@ -146,7 +149,9 @@ function App() {
     <div className='page__content'>
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
-          <Route exact path='/my-profile'>
+          <Route exact path='/'>
+
+            {isLoggedIn ? <Redirect to="/"/> : <Redirect to="/sign-in"/> }
 
             <Header loggedIn={isLoggedIn}/>
 
@@ -176,14 +181,14 @@ function App() {
           <Route path='/sign-up'>
             <Header loggedIn={isLoggedIn}/>
             <Register />
+            <InfoToolTip isSuccess={isSuccess} />            
           </Route>
           <Route path='/sign-in'>
-          <Header loggedIn={!isLoggedIn}/>
+            <Header loggedIn={!isLoggedIn}/>
             <Login />
+            <InfoToolTip isSuccess={!isSuccess} /> 
           </Route>
-          <Route exact path='/'>
-            {isLoggedIn ? <Redirect to="/my-profile"/> : <Redirect to="/sign-in"/> }
-          </Route>
+        
           <Route path='*'>
             <div style={{color: "#FF8C00"}}>404</div>
           </Route>
