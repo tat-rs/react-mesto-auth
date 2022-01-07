@@ -12,7 +12,7 @@ function Header(props) {
           <img className='header__logo' src={headerLogo} alt="Логотип" />
         </a>
         <div>
-          {props.loggedIn && <Link to='/sign-up' className='header__link link'>Регистрация</Link>}
+          {!props.isloggedIn && <Link to='/sign-up' className='header__link link'>Регистрация</Link>}
         </div>
       </header>
     </>

@@ -13,6 +13,7 @@ import PopupConfirmation from './PopupConfirmation';
 import Login from './Login';
 import Register from './Register';
 import InfoToolTip from './InfoTooltip';
+import ProtectedRoute from './ProtectedRoute';
 import { Route, Switch } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
@@ -33,8 +34,6 @@ function App() {
   const [cards, setCards] = React.useState([]);//хук состояния карточки 
 
   const [isLoggedIn, setLoggedIn] = React.useState(false); //стейт, содержащий инф-ию о статусе пользователя
-
-  const [isSuccess, setSuccess] = React.useState(false); //стейт попапа с успешной авторизацией
   
   //обработчик открытия попапа редактирования аватара профиля
   function handleEditAvatarClick() {
@@ -148,14 +147,19 @@ function App() {
   return (
     <div className='page__content'>
       <CurrentUserContext.Provider value={currentUser}>
+
+      <Header isloggedIn={isLoggedIn}/>
+      
         <Switch>
-          <Route exact path='/'>
 
-            {isLoggedIn ? <Redirect to="/"/> : <Redirect to="/sign-in"/> }
+          {/* <Route exact path='/'>
+            { isLoggedIn ? <Redirect to='/my-profile' /> : <Redirect to='sign-in' /> }
+          </Route> */}
 
-            <Header loggedIn={isLoggedIn}/>
-
-            <Main 
+          <ProtectedRoute
+            exact path='/'
+            isLoggedIn={isLoggedIn}
+            component={() => <Main 
               onEditAvatar={handleEditAvatarClick}
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
@@ -163,36 +167,44 @@ function App() {
               cards={cards}
               onCardLike={handleCardLike}
               onBtnDelete={handlePopupConfirmationClick}
-            />
+            />}
+          />
 
-            <Footer />
+          <ProtectedRoute
+            exact path='/'
+            isLoggedIn={isLoggedIn}
+            component={Footer}
+          />
 
-            <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} textOfButton='Сохранить'/>
-
-            <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} textOfButton='Создать'/>
-
-            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} textOfButton='Сохранить' />
-
-            <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-
-            <PopupConfirmation isOpen={isPopupConfirmationOpen} onClose={closeAllPopups} card={selectedCard} textOfButton="Да" removeCard={handleCardDelete}/>
-
-          </Route>
           <Route path='/sign-up'>
-            <Header loggedIn={isLoggedIn}/>
-            <Register />
-            <InfoToolTip isSuccess={isSuccess} />            
+            <Register />          
           </Route>
+
           <Route path='/sign-in'>
-            <Header loggedIn={!isLoggedIn}/>
             <Login />
-            <InfoToolTip isSuccess={!isSuccess} /> 
           </Route>
-        
-          <Route path='*'>
+
+          {/* <Route exact path='/'>
+            { isLoggedIn ? <Redirect to='/my-profile' /> : <Redirect to='sign-in' /> }
+          </Route> */}
+
+          {/* <Route path='*'>
             <div style={{color: "#FF8C00"}}>404</div>
-          </Route>
+          </Route> */}
+
         </Switch>
+
+        <InfoToolTip />
+
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} textOfButton='Сохранить'/>
+
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} textOfButton='Создать'/>
+
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} textOfButton='Сохранить' />
+
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+
+        <PopupConfirmation isOpen={isPopupConfirmationOpen} onClose={closeAllPopups} card={selectedCard} textOfButton="Да" removeCard={handleCardDelete}/>
 
         
       </CurrentUserContext.Provider>
