@@ -4,6 +4,10 @@ import {Link} from 'react-router-dom'
 
 function Header(props) {
 
+  function signOut(){
+    props.signOutClick()
+  }
+
   //вернули разметку
   return (
     <>
@@ -11,10 +15,14 @@ function Header(props) {
         <a className='logo link' href='https://tat-rs.github.io/mesto-react/'>
           <img className='header__logo' src={headerLogo} alt="Логотип" />
         </a>
-        <div>
-          {/* {!props.isloggedIn && <Link to='/sign-up' className='header__link link'>Регистрация</Link>} */}
-          <h3>{props.useremail}</h3>
+
+        {props.isLoggedIn ? (
+          <div className='header__container'>
+          <p className='header__user'>{props.useremail}</p>
+          <Link to='/sign-in' className='header__link-push' onClick={signOut}>Выйти</Link>
         </div>
+        ) : ''}
+
       </header>
     </>
   );

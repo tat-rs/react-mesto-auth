@@ -9,7 +9,9 @@
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
-@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__container/header__container.css);
+@import url(./blocks/header/__link-push/header__link-push.css);
+@import url(./blocks/header/__user/header__user.css);
 
 @import url(./blocks/logo/logo.css);
 

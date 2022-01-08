@@ -39,6 +39,8 @@ function App() {
   const [email, setEmail] = React.useState('')
 
   const history = useHistory()
+
+  console.log(isLoggedIn)
   
   //обработчик открытия попапа редактирования аватара профиля
   function handleEditAvatarClick() {
@@ -95,6 +97,19 @@ function App() {
     .catch(err => console.log(err))
     
   }, [])
+
+  function tokenCheck() {
+    const token = localStorage.getItem('token')
+    if(token){
+      auth.getContent(token)
+        .then((data) => data)
+        .then((res) => {
+          setEmail(res.data.email)
+          handleLogin()
+          history.push('/')
+        })
+    }
+  }
 
   //получили массив карточек
   /* React.useEffect(() => {
@@ -175,7 +190,7 @@ function App() {
     .catch(err => console.log(err))
   }
 
-  function tokenCheck() {
+  /* function tokenCheck() {
     const token = localStorage.getItem('token')
     if(token){
       auth.getContent(token)
@@ -186,13 +201,19 @@ function App() {
           history.push('/')
         })
     }
+  } */
+
+  function signOutClick(){
+    localStorage.removeItem('token');
+    setLoggedIn(false)
+    history.push('/sign-in');
   }
 
   return (
     <div className='page__content'>
       <CurrentUserContext.Provider value={currentUser}>
 
-      <Header isloggedIn={isLoggedIn} useremail={email} />
+      <Header isLoggedIn={isLoggedIn} useremail={email} signOutClick={signOutClick} />
       
         <Switch>
 
