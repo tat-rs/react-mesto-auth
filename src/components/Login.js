@@ -11,7 +11,8 @@ function Login(props) {
 
   /* const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('') */
-  console.log(values)
+
+  /* console.log(values) */
 
   function handleSubmit(evt) {
     evt.preventDefault()

@@ -36,11 +36,13 @@ function App() {
 
   const [isLoggedIn, setLoggedIn] = React.useState(false); //стейт, содержащий инф-ию о статусе пользователя
 
-  const [email, setEmail] = React.useState('')
+  const [email, setEmail] = React.useState(''); //стейт, эл. почты пользователя
+
+  const [isInfoToolTipOpen, setInfoToolTipOpen] = React.useState(false); //состояние попапа результата регистрации
+
+  const [isSuccess, setSuccess] = React.useState(false);
 
   const history = useHistory()
-
-  console.log(isLoggedIn)
   
   //обработчик открытия попапа редактирования аватара профиля
   function handleEditAvatarClick() {
@@ -73,6 +75,7 @@ function App() {
 
   //сброс состояний переменных
   function closeAllPopups() {
+    setInfoToolTipOpen(false)
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
@@ -111,28 +114,9 @@ function App() {
     }
   }
 
-  //получили массив карточек
-  /* React.useEffect(() => {
-    tokenCheck()
-    // Отправляем запрос в API и получаем первоначальный массив карточек
-    api.getAllCards()
-    .then((cardData) => {
-      setCards(cardData)
-    })
-    .catch(err => console.log(err))
-  }, [])
-
-  //получили данные пользователя
-  React.useEffect(() => {
-    // Отправляем запрос в API и получаем обновлённые данные пользователя
-    api.getUserInfo()
-    .then((userData) => {
-      setCurrentUser(userData); //обновили данные текущего пользователя
-    })
-    .catch(err => console.log(err))
-  }, []) */
-
-  console.log(email)
+  function handleInfoTooltipClick() {
+    setInfoToolTipOpen(true)
+  }
 
   //обновление данных пользователя(имя, описание)
   function handleUpdateUser(data) {
@@ -190,19 +174,6 @@ function App() {
     .catch(err => console.log(err))
   }
 
-  /* function tokenCheck() {
-    const token = localStorage.getItem('token')
-    if(token){
-      auth.getContent(token)
-        .then((data) => data)
-        .then((res) => {
-          setEmail(res.data.email)
-          handleLogin()
-          history.push('/')
-        })
-    }
-  } */
-
   function signOutClick(){
     localStorage.removeItem('token');
     setLoggedIn(false)
@@ -238,7 +209,7 @@ function App() {
           />
 
           <Route path='/sign-up'>
-            <Register />          
+            <Register handleClick={handleInfoTooltipClick} setSuccess={setSuccess}/>          
           </Route>
 
           <Route path='/sign-in'>
@@ -255,7 +226,7 @@ function App() {
 
         </Switch>
 
-        <InfoToolTip />
+        <InfoToolTip isOpen={isInfoToolTipOpen} onClose={closeAllPopups} isSuccess={isSuccess}/>
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} textOfButton='Сохранить'/>
 

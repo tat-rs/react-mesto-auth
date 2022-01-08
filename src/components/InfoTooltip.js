@@ -6,11 +6,11 @@ function InfoToolTip(props) {
   
   return (
     <>
-    <div className='popup' /* onMouseDown ={props.onClose} */>
-        <div className='popup__container' /* onMouseDown ={(evt) => evt.stopPropagation()} */>
-          <button className='popup__close link' type='button' aria-label='Закрыть форму' ></button>
+    <div className={`popup ${props.isOpen ? 'popup_opened' : '' }`} onMouseDown={props.onClose}>
+        <div className='popup__container' onMouseDown ={(evt) => evt.stopPropagation()}>
+          <button className='popup__close link' type='button' aria-label='Закрыть форму' onClick={props.onClose}></button>
           <div className="popup__result result">
-            {/* {props.isSuccess ? <img className="result__image" src={iconSuccess} /> : <img className="result__image" src={iconError} />} */}
+            <img className="result__image" src={props.isSuccess ? iconSuccess : iconError} />
             <p className="result__text">{props.isSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'}</p>
           </div>         
         </div>

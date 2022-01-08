@@ -24,9 +24,14 @@ function Register() {
       .then((res) => {
         return res;
       })
-      .then(() => {
-        /* setPassword('')
-        setEmail('') */
+      /* .then(() => {
+        setPassword('')
+        setEmail('')
+        history.push('/sign-in')
+      }) */
+      .then((res) => {
+        setPassword('')
+        setEmail('')
         history.push('/sign-in')
       })
       .catch((err) => console.log(err));
