@@ -12,7 +12,8 @@ function Header(props) {
           <img className='header__logo' src={headerLogo} alt="Логотип" />
         </a>
         <div>
-          {!props.isloggedIn && <Link to='/sign-up' className='header__link link'>Регистрация</Link>}
+          {/* {!props.isloggedIn && <Link to='/sign-up' className='header__link link'>Регистрация</Link>} */}
+          <h3>{props.useremail}</h3>
         </div>
       </header>
     </>

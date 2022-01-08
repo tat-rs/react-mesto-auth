@@ -14,8 +14,9 @@ import Login from './Login';
 import Register from './Register';
 import InfoToolTip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+import auth from '../utils/auth';
 
 function App() {
 
@@ -34,6 +35,10 @@ function App() {
   const [cards, setCards] = React.useState([]);//хук состояния карточки 
 
   const [isLoggedIn, setLoggedIn] = React.useState(false); //стейт, содержащий инф-ию о статусе пользователя
+
+  const [email, setEmail] = React.useState('')
+
+  const history = useHistory()
   
   //обработчик открытия попапа редактирования аватара профиля
   function handleEditAvatarClick() {
@@ -60,6 +65,10 @@ function App() {
     setIsPopupConfirmationOpen(true)
   }
 
+  function handleLogin() {
+    setLoggedIn(true)
+  }
+
   //сброс состояний переменных
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false)
@@ -68,8 +77,28 @@ function App() {
     setSelectedCard({})
     setIsPopupConfirmationOpen(false)
   }
-  //получили массив карточек
+
   React.useEffect(() => {
+    tokenCheck()
+    // Отправляем запрос в API и получаем первоначальный массив карточек
+    api.getAllCards()
+    .then((cardData) => {
+      setCards(cardData)
+    })
+    .catch(err => console.log(err))
+
+    //Отправляем запрос в API и получаем обновлённые данные пользователя
+    api.getUserInfo()
+    .then((userData) => {
+      setCurrentUser(userData); //обновили данные текущего пользователя
+    })
+    .catch(err => console.log(err))
+    
+  }, [])
+
+  //получили массив карточек
+  /* React.useEffect(() => {
+    tokenCheck()
     // Отправляем запрос в API и получаем первоначальный массив карточек
     api.getAllCards()
     .then((cardData) => {
@@ -86,7 +115,9 @@ function App() {
       setCurrentUser(userData); //обновили данные текущего пользователя
     })
     .catch(err => console.log(err))
-  }, [])
+  }, []) */
+
+  console.log(email)
 
   //обновление данных пользователя(имя, описание)
   function handleUpdateUser(data) {
@@ -144,17 +175,26 @@ function App() {
     .catch(err => console.log(err))
   }
 
+  function tokenCheck() {
+    const token = localStorage.getItem('token')
+    if(token){
+      auth.getContent(token)
+        .then((data) => data)
+        .then((res) => {
+          setEmail(res.data.email)
+          handleLogin()
+          history.push('/')
+        })
+    }
+  }
+
   return (
     <div className='page__content'>
       <CurrentUserContext.Provider value={currentUser}>
 
-      <Header isloggedIn={isLoggedIn}/>
+      <Header isloggedIn={isLoggedIn} useremail={email} />
       
         <Switch>
-
-          {/* <Route exact path='/'>
-            { isLoggedIn ? <Redirect to='/my-profile' /> : <Redirect to='sign-in' /> }
-          </Route> */}
 
           <ProtectedRoute
             exact path='/'
@@ -181,7 +221,7 @@ function App() {
           </Route>
 
           <Route path='/sign-in'>
-            <Login />
+            <Login handleLogin={handleLogin}/>
           </Route>
 
           {/* <Route exact path='/'>
