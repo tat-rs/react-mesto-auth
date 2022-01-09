@@ -6,3 +6,10 @@
   line-height: 29px;
   text-align: center;
 }
+
+@media (max-width:590px) {
+  .result__text {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

@@ -1,33 +1,28 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom'
-import { useForm } from '../utils/useForm';
+import { useForm } from '../hooks/useForm';
 import auth from '../utils/auth';
 
 function Login(props) {
 
-  const history = useHistory()
-
   const {values, errors, isValid, handleChange, setValues} = useForm();
 
+  //вход в систему по клику на сабмит
   function handleSubmit(evt) {
-    evt.preventDefault()
+    evt.preventDefault();
+
     auth.authorize(values.email, values.password)
       .then((data) => {
-        if (data.token){
-          localStorage.setItem('token', data.token);
-          return data;
-        }
-      })
-      .then((data) => {
         if(data.token) {
-          setValues({})
-          props.handleLogin()
-          history.push('/')
+          setValues({});
+          props.handleUserEmail(values.email); //сохранили эл. почту пользователя в стейт
+          props.onLogin(data.token); //переход на страницу пользователя
+        } else {
+          return
         }
       })
       .catch(() => {
-        props.handleClick();
-        props.setSuccess(false)
+        props.handleClick(); //открытие модального окна с ошибкой
+        props.setSuccess(false);
       })
       
   }

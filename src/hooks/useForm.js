@@ -14,17 +14,19 @@ export function useForm() {
     let name = evt.target.name
     let value = evt.target.value
 
+    //объект с инф-ии о значениях в инпуте
     setValues({
       ...values,
       [name] : value,
     })
 
+    //объект с инф-ии об ошибках в инпуте
     setErrors({
       ...errors,
       [evt.target.name]: evt.target.validationMessage
     })
 
-    setValid(evt.target.closest(".form").checkValidity())
+    setValid(evt.target.closest(".form").checkValidity());//состояние валидности формы
   }
 
   return {

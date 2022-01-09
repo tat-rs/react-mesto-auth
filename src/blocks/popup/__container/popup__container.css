@@ -5,3 +5,9 @@
   border-radius: 10px;
   max-width: 430px;
 }
+
+@media (max-width:590px) {
+  .popup__container {
+    max-width: 280px;
+  }
+}

@@ -47,11 +47,6 @@
 @import url(./blocks/footer/__author/footer__author.css);
 
 @import url(./blocks/popup/popup.css);
-@import url(./blocks/popup/_type/popup_type_edit.css);
-@import url(./blocks/popup/_type/popup_type_new-card.css);
-@import url(./blocks/popup/_type/popup_type_image.css);
-@import url(./blocks/popup/_type/popup_type_delete.css);
-@import url(./blocks/popup/_type/popup_type_edit-avatar.css);
 @import url(./blocks/popup/_opened/popup_opened.css);
 @import url(./blocks/popup/__container/popup__container.css);
 @import url(./blocks/popup/__container/_transparent/popup__container_transparent.css);
@@ -72,10 +67,6 @@
 @import url(./blocks/form/__items/form__items.css);
 @import url(./blocks/form/__items/_color/form__items_color_white.css);
 @import url(./blocks/form/__item/form__item.css);
-@import url(./blocks/form/__item/_type/form__item_type_name.css);
-@import url(./blocks/form/__item/_type/form__item_type_desc.css);
-@import url(./blocks/form/__item/_type/form__item_type_image-subtitle.css);
-@import url(./blocks/form/__item/_type/form__item_type_image-link.css);
 @import url(./blocks/form/__item/_state/form__item_state_invalid.css);
 @import url(./blocks/form/__item/_color/form__item_color_white.css);
 @import url(./blocks/form/__error/form__error.css);
@@ -97,7 +88,3 @@
 @import url(./blocks/result/__image/result__image.css);
 @import url(./blocks/result/__text/resilt__text.css);
 
-@import url(./blocks/name-profile-error/name-profile-error.css);
-@import url(./blocks/desc-profile-error/desc-profile-error.css);
-@import url(./blocks/image-subtitle-error/image-subtitle-error.css);
-@import url(./blocks/image-link-error/image-link-error.css);

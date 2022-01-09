@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "../utils/useForm";
+import { useForm } from "../hooks/useForm";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
@@ -18,7 +18,6 @@ function AddPlacePopup(props) {
 
   //передаем новые значения инпутов по сабмиту
   function handleSubmit(evt) {
-    // отменяем действие браузера по умолчанию
     evt.preventDefault();
   
     // Передаём значения управляемых компонентов во внешний обработчик (название и ссылка на изображение)

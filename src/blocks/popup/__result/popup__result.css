@@ -2,3 +2,9 @@
   box-sizing: border-box;
   padding: 60px 36px;
 }
+
+@media (max-width:590px) {
+  .popup__result {
+    padding: 50px 18px;
+  }
+}

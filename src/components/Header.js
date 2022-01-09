@@ -8,7 +8,7 @@ function Header(props) {
 
   const link = (location.pathname === '/' || location.pathname === '/sign-up') ? '/sign-in' : '/sign-up'; //адрес ссылки
   const textLink = (location.pathname === '/') ? 'Выйти' : (location.pathname === '/sign-up') ? 'Войти' : 'Регистрация'; //заголовок ссылки
-  const classLink = (`header__link-push ${props.isLoggedIn ? 'header__link-push_color_grey' : ''}`); //класс ссылки
+  const classLink = (`header__link-push link ${props.isLoggedIn ? 'header__link-push_color_grey' : ''}`); //класс ссылки
 
   //выход из профиля
   function signOut(){

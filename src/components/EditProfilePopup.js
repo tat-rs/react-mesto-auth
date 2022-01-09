@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import {useForm} from '../utils/useForm'
+import {useForm} from '../hooks/useForm'
 
 function EditProfilePopup(props) {
 
@@ -39,9 +39,9 @@ function EditProfilePopup(props) {
       <PopupWithForm name='edit' title='Редактировать профиль' textOfButton='Сохранить' isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit} button={loader} disabledButton={!isValid}>
 
         <input className="form__item" id="name-profile" type="text" name="name" placeholder="Имя" minLength="2" maxLength="40" value={values.name || ''} onChange={handleChange} required />
-        <span className="form__error name-profile-error">{!isValid && errors.name}</span>
+        <span className="form__error">{!isValid && errors.name}</span>
         <input className="form__item" id="desc-profile" type="text" name="about" placeholder="О себе" minLength="2" maxLength="200" value={values.about || ''} onChange={handleChange} required />
-        <span className="form__error desc-profile-error">{!isValid && errors.about}</span>
+        <span className="form__error">{!isValid && errors.about}</span>
 
       </PopupWithForm>
     </>

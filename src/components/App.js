@@ -39,7 +39,7 @@ function App() {
 
   const [isInfoToolTipOpen, setInfoToolTipOpen] = React.useState(false); //состояние попапа результата регистрации
 
-  const [isSuccess, setSuccess] = React.useState(false);
+  const [isSuccess, setSuccess] = React.useState(false); //состояние переменной об успешной/неуспешной регистрации
 
   const history = useHistory()
   
@@ -68,8 +68,14 @@ function App() {
     setIsPopupConfirmationOpen(true)
   }
 
+  //обработчик статуса пользователя
   function handleLogin() {
     setLoggedIn(true)
+  }
+
+  //обработчик эл. почты пользователя
+  function handleUserEmail(userEmail) {
+    setEmail(userEmail)
   }
 
   //сброс состояний переменных
@@ -97,25 +103,27 @@ function App() {
     })
     .catch(err => console.log(err))
 
-    tokenCheck()
+    tokenCheck();//проверка токена
     
   }, [])
 
+  //проверка токена пользователя
   function tokenCheck() {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token'); //сохранили токен
     if(token){
       auth.getContent(token)
         .then((data) => data)
         .then((res) => {
-          setEmail(res.data.email)
-          handleLogin()
-          history.push('/')
+          handleUserEmail(res.data.email); //обновили стейт эл. почты пользователя
+          handleLogin(); //обновлен статус пользователя - зарегистрирован
+          history.push('/'); //переадресация на страницу пользователя
         })
     }
   }
 
+  //обработчик модального окна успешной/неуспешной регистрации
   function handleInfoTooltipClick() {
-    setInfoToolTipOpen(true)
+    setInfoToolTipOpen(true);
   }
 
   //обновление данных пользователя(имя, описание)
@@ -160,7 +168,7 @@ function App() {
       setCards((state) => state.filter(element => element._id !== card._id)) //отфильтровали карточки по которым айди не совпали при клике на удаление
       closeAllPopups()
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
   }
 
   //функция добавления карточки
@@ -174,10 +182,18 @@ function App() {
     .catch(err => console.log(err))
   }
 
+  //функция перехода на страницу пользователя
+  function onLogin(token) {
+    localStorage.setItem('token', token);//сохранили токен
+    handleLogin();//статус пользователя - зарегистрирован
+    history.push('/'); //переадресация на основную страницу
+  }
+  
+  //функция выхода из системы
   function signOutClick(){
-    localStorage.removeItem('token');
-    setLoggedIn(false)
-    history.push('/sign-in');
+    localStorage.removeItem('token'); //удалили токен
+    setLoggedIn(false); // обновили статус пользователя
+    history.push('/sign-in');//переадресация на странцицу входа
   }
 
   return (
@@ -213,12 +229,8 @@ function App() {
           </Route>
 
           <Route path='/sign-in'>
-            <Login handleLogin={handleLogin} handleClick={handleInfoTooltipClick} setSuccess={setSuccess}/>
+            <Login onLogin={onLogin} handleClick={handleInfoTooltipClick} setSuccess={setSuccess} handleUserEmail={handleUserEmail}/>
           </Route>
-
-          {/* <Route path='*'>
-            <div style={{color: "#FF8C00"}}>404</div>
-          </Route> */}
 
         </Switch>
 
@@ -234,7 +246,6 @@ function App() {
 
         <PopupConfirmation isOpen={isPopupConfirmationOpen} onClose={closeAllPopups} card={selectedCard} textOfButton="Да" removeCard={handleCardDelete}/>
 
-        
       </CurrentUserContext.Provider>
 
     </div>

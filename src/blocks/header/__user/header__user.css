@@ -2,4 +2,14 @@
   margin: 0 24px 0 0;
   font-weight: 500;
   color: #fff;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media(max-width: 590px) {
+  .header__user {
+    margin: 0 0 15px;
+  }
 }

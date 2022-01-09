@@ -1,29 +1,28 @@
 import React from "react";
 import {Link, useHistory } from 'react-router-dom'
 import auth from "../utils/auth";
-import { useForm } from "../utils/useForm";
+import { useForm } from "../hooks/useForm";
 
 function Register(props) {
 
-  const history = useHistory()
+  const history = useHistory();
 
   const {values, errors, isValid, handleChange, setValues} = useForm();
 
+  //фцнкция регистрации пользователя по сабмиту
   function handleSubmit(evt) {
-    evt.preventDefault()
+    evt.preventDefault();
+
     auth.register(values.email, values.password)
       .then((res) => {
-        return res;
-      })
-      .then((res) => {
         if(res) {
-          props.handleClick();
-          props.setSuccess(true);
-          setValues({})
-          history.push('/sign-in')
+          props.handleClick(); //открытие модального окна
+          props.setSuccess(true); //сообщение об успешной регистраци
+          setValues({});
+          history.push('/sign-in');
         } else {
-          props.handleClick();
-          props.setSuccess(false)
+          props.handleClick(); //открытие модального окна
+          props.setSuccess(false); //сообщение о проблеме при регистраци
         }
       })
       .catch((err) => console.log(err));

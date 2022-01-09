@@ -4,9 +4,3 @@
   justify-content: flex-start;
   width: 100%;
 }
-
-@media (max-width:590px) {
-  .form {
-    padding: 25px 22px;
-  }
-}
