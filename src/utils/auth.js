@@ -10,7 +10,7 @@ class Api {
   //метод проверки результата запроса к серверу
   _checkResponse(res) {
     try {
-      if (res.status === 200){
+      if (res.status === 200 || res.status === 201){
         return res.json();
       }
     } catch(error){
@@ -18,6 +18,7 @@ class Api {
     }
   }
 
+  //регистрация
   register(email, password) {
     return fetch(`${this._url}/signup`, {
       method: "POST",
@@ -27,6 +28,7 @@ class Api {
     .then(this._checkResponse)
   };
 
+  //аутентификация
   authorize(email, password) {
     return fetch(`${this._url}/signin`, {
       method: "POST",
@@ -36,6 +38,7 @@ class Api {
     .then(this._checkResponse)
   };
 
+  //проверка токена
   getContent(token) {
     return fetch(`${this._url}/users/me`, {
       method: "GET",

@@ -35,9 +35,9 @@ function AddPlacePopup(props) {
     <>
       <PopupWithForm name='new-card' title='Новое место' textOfButton='Создать' isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit} button={loader} disabledButton={!isValid}>
 
-        <input className="form__item form__item_type_image-subtitle" id="image-subtitle" type="text" name="subtitle" placeholder="Название" minLength="2" maxLength="30" value={values.subtitle || ''} onChange={handleChange} required />
+        <input className="form__item" id="image-subtitle" type="text" name="subtitle" placeholder="Название" minLength="2" maxLength="30" value={values.subtitle || ''} onChange={handleChange} required />
         <span className="form__error image-subtitle-error">{!isValid && errors.subtitle}</span>
-        <input className="form__item form__item_type_image-link" id="image-link" type="url" name="link" placeholder="Ссылка на картинку" value={values.link || ''} onChange={handleChange} required />
+        <input className="form__item" id="image-link" type="url" name="link" placeholder="Ссылка на картинку" value={values.link || ''} onChange={handleChange} required />
         <span className="form__error image-link-error">{!isValid && errors.link}</span>
 
       </PopupWithForm>

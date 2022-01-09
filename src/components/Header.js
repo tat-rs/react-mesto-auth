@@ -15,14 +15,12 @@ function Header(props) {
     props.signOutClick()
   };
 
-  
-  //вернули разметку
   return (
     <>
       <header className='header page__header'>
-        <a className='logo link' href='https://tat-rs.github.io/mesto-react/'>
+        <Link className='logo link' to='/'>
           <img className='header__logo' src={headerLogo} alt="Логотип" />
-        </a>
+        </Link>
 
         <div className='header__container'>
           {props.isLoggedIn ? (<p className='header__user'>{props.useremail}</p>) : ''}

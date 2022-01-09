@@ -1,0 +1,12 @@
+.form__items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 31.34px;
+}
+
+@media (max-width:590px) {
+  .form__items {
+    margin-bottom: 28.34px;
+  }
+}

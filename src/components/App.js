@@ -15,7 +15,6 @@ import Register from './Register';
 import InfoToolTip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 import auth from '../utils/auth';
 
 function App() {
@@ -84,7 +83,6 @@ function App() {
   }
 
   React.useEffect(() => {
-    tokenCheck()
     // Отправляем запрос в API и получаем первоначальный массив карточек
     api.getAllCards()
     .then((cardData) => {
@@ -98,6 +96,8 @@ function App() {
       setCurrentUser(userData); //обновили данные текущего пользователя
     })
     .catch(err => console.log(err))
+
+    tokenCheck()
     
   }, [])
 
@@ -213,12 +213,8 @@ function App() {
           </Route>
 
           <Route path='/sign-in'>
-            <Login handleLogin={handleLogin}/>
+            <Login handleLogin={handleLogin} handleClick={handleInfoTooltipClick} setSuccess={setSuccess}/>
           </Route>
-
-          {/* <Route exact path='/'>
-            { isLoggedIn ? <Redirect to='/my-profile' /> : <Redirect to='sign-in' /> }
-          </Route> */}
 
           {/* <Route path='*'>
             <div style={{color: "#FF8C00"}}>404</div>
