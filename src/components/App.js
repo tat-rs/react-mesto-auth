@@ -118,6 +118,7 @@ function App() {
           handleLogin(); //обновлен статус пользователя - зарегистрирован
           history.push('/'); //переадресация на страницу пользователя
         })
+        .catch(err => console.log(err))
     }
   }
 
@@ -183,10 +184,40 @@ function App() {
   }
 
   //функция перехода на страницу пользователя
-  function onLogin(token) {
-    localStorage.setItem('token', token);//сохранили токен
-    handleLogin();//статус пользователя - зарегистрирован
-    history.push('/'); //переадресация на основную страницу
+  function onLogin(userEmail, userPassword) {
+
+    auth.authorize(userEmail, userPassword)
+      .then((data) => {
+        if(data.token) {
+          handleUserEmail(userEmail); //сохранили эл. почту пользователя в стейт
+          localStorage.setItem('token', data.token);//сохранили токен
+          handleLogin();//статус пользователя - зарегистрирован
+          history.push('/'); //переадресация на основную страницу
+        } else {
+          return
+        }
+      })
+      .catch(() => {
+        handleInfoTooltipClick(); //открытие модального окна с ошибкой
+        setSuccess(false);
+      })
+  }
+
+  function onRegister(userEmail, userPassword) {
+    
+    auth.register(userEmail, userPassword)
+      .then((res) => {
+        if(res) {
+          handleInfoTooltipClick(); //открытие модального окна
+          setSuccess(true); //сообщение об успешной регистраци
+          history.push('/sign-in');
+        } else {
+          handleInfoTooltipClick(); //открытие модального окна
+          setSuccess(false); //сообщение о проблеме при регистраци
+        }
+      })
+      .catch((err) => console.log(err));
+
   }
   
   //функция выхода из системы
@@ -225,11 +256,11 @@ function App() {
           />
 
           <Route path='/sign-up'>
-            <Register handleClick={handleInfoTooltipClick} setSuccess={setSuccess}/>          
+            <Register onRegister={onRegister}/>          
           </Route>
 
           <Route path='/sign-in'>
-            <Login onLogin={onLogin} handleClick={handleInfoTooltipClick} setSuccess={setSuccess} handleUserEmail={handleUserEmail}/>
+            <Login onLogin={onLogin} />
           </Route>
 
         </Switch>

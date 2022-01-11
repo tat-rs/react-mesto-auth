@@ -13,7 +13,9 @@ function Register(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    auth.register(values.email, values.password)
+    props.onRegister(values.email, values.password)
+
+    /* auth.register(values.email, values.password)
       .then((res) => {
         if(res) {
           props.handleClick(); //открытие модального окна
@@ -25,7 +27,7 @@ function Register(props) {
           props.setSuccess(false); //сообщение о проблеме при регистраци
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)); */
       
   }
 

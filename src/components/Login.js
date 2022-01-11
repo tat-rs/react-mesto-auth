@@ -1,29 +1,15 @@
 import React from 'react';
 import { useForm } from '../hooks/useForm';
-import auth from '../utils/auth';
 
 function Login(props) {
 
-  const {values, errors, isValid, handleChange, setValues} = useForm();
+  const {values, errors, isValid, handleChange} = useForm();
 
   //вход в систему по клику на сабмит
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    auth.authorize(values.email, values.password)
-      .then((data) => {
-        if(data.token) {
-          setValues({});
-          props.handleUserEmail(values.email); //сохранили эл. почту пользователя в стейт
-          props.onLogin(data.token); //переход на страницу пользователя
-        } else {
-          return
-        }
-      })
-      .catch(() => {
-        props.handleClick(); //открытие модального окна с ошибкой
-        props.setSuccess(false);
-      })
+    props.onLogin(values.email, values.password);
       
   }
 
