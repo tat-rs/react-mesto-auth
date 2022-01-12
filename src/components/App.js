@@ -256,11 +256,11 @@ function App() {
           />
 
           <Route path='/sign-up'>
-            <Register onRegister={onRegister}/>          
+            <Register title='Регистрация' textOfButton='Зарегистрироваться' onRegister={onRegister}/>          
           </Route>
 
           <Route path='/sign-in'>
-            <Login onLogin={onLogin} />
+            <Login title='Войти' textOfButton='Войти' onLogin={onLogin} />
           </Route>
 
         </Switch>

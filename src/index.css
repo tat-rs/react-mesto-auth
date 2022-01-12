@@ -1,6 +1,12 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
 
+@import url(./blocks/authorize/authorize.css);
+@import url(./blocks/authorize/__container/authorize__container.css);
+@import url(./blocks/authorize/__text/authorize__text.css);
+@import url(./blocks/authorize/__link/authorize__link.css);
+
+
 @import url(./blocks/page/page.css);
 @import url(./blocks/page/__section/page__section.css);
 @import url(./blocks/page/__header/page__header.css);
@@ -75,13 +81,6 @@
 @import url(./blocks/form/__button/_place/form__button_place_new-card.css);
 @import url(./blocks/form/__button/_place/form__button_place_delete.css);
 @import url(./blocks/form/__button/_color/form__button_color_white.css);
-
-@import url(./blocks/sign-in/sign-in.css);
-
-@import url(./blocks/sign-up/sign-up.css);
-@import url(./blocks/sign-up/__container/sign-up__container.css);
-@import url(./blocks/sign-up/__link/sign-up__link.css);
-@import url(./blocks/sign-up/__text/sign-up__text.css);
 
 @import url(./blocks/result/result.css);
 @import url(./blocks/popup/__result/popup__result.css);
