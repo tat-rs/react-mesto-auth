@@ -41,11 +41,11 @@ function App() {
 
   const [isSuccess, setSuccess] = React.useState(false); //состояние переменной об успешной/неуспешной регистрации
 
-  const history = useHistory()
+  const history = useHistory();
   
   //обработчик открытия попапа редактирования аватара профиля
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true)
   }
 
   //обработчик открытия попапа редактирования профиля
