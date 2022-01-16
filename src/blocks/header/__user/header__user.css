@@ -8,8 +8,9 @@
   white-space: nowrap;
 }
 
-@media(max-width: 590px) {
+@media(max-width: 768px) {
   .header__user {
-    margin: 0 0 15px;
+    text-align: center;
+    margin: 0 0 18px;
   }
 }

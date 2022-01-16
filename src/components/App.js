@@ -41,6 +41,8 @@ function App() {
 
   const [isSuccess, setSuccess] = React.useState(false); //состояние переменной об успешной/неуспешной регистрации
 
+  const [isMenuOpen, setMenuOpen] = React.useState(false); //состояние переменной открытия меню
+
   const history = useHistory();
   
   //обработчик открытия попапа редактирования аватара профиля
@@ -76,6 +78,10 @@ function App() {
   //обработчик эл. почты пользователя
   function handleUserEmail(userEmail) {
     setEmail(userEmail)
+  }
+
+  function handleMenuClick() {
+    setMenuOpen(!isMenuOpen)
   }
 
   //сброс состояний переменных
@@ -231,7 +237,7 @@ function App() {
     <div className='page__content'>
       <CurrentUserContext.Provider value={currentUser}>
 
-      <Header isLoggedIn={isLoggedIn} useremail={email} signOutClick={signOutClick} />
+      <Header isLoggedIn={isLoggedIn} useremail={email} signOutClick={signOutClick} handleMenuClick={handleMenuClick} isMenuOpen={isMenuOpen} />
       
         <Switch>
 

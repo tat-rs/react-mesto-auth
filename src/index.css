@@ -6,6 +6,11 @@
 @import url(./blocks/authorize/__text/authorize__text.css);
 @import url(./blocks/authorize/__link/authorize__link.css);
 
+@import url(./blocks/button/button.css);
+@import url(./blocks/button/__line/button__line.css);
+@import url(./blocks/button/__line/_right/button__line_right.css);
+@import url(./blocks/button/__line/_left/button__line_left.css);
+@import url(./blocks/button/__line/_hidden/button__line_hidden.css);
 
 @import url(./blocks/page/page.css);
 @import url(./blocks/page/__section/page__section.css);
@@ -16,6 +21,8 @@
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
 @import url(./blocks/header/__container/header__container.css);
+@import url(./blocks/header/__container/_type/header__container_type_burger-menu.css);
+@import url(./blocks/header/__container/_type/header__container_type_profile-menu.css);
 @import url(./blocks/header/__link-push/header__link-push.css);
 @import url(./blocks/header/__link-push/_color/header__link-push_color_grey.css);
 @import url(./blocks/header/__user/header__user.css);

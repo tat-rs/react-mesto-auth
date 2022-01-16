@@ -3,11 +3,4 @@
   font-style: normal;
   font-size: 18px;
   line-height: 22px;
-  max-width: calc(100% - 103px);
-}
-
-@media(max-width: 590px) {
-  .header__container {
-    flex-direction: column;
-  }
 }

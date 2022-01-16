@@ -1,6 +1,7 @@
 import React from 'react';
-import headerLogo from '../images/logo.svg'
-import {Link, useLocation} from 'react-router-dom'
+import headerLogo from '../images/logo.svg';
+import {Link, useLocation} from 'react-router-dom';
+import HamburgerButton from './HamburgerButton';
 
 function Header(props) {
 
@@ -17,15 +18,26 @@ function Header(props) {
 
   return (
     <>
-      <header className='header page__header'>
-        <Link className='logo link' to='/'>
-          <img className='header__logo' src={headerLogo} alt="Логотип" />
-        </Link>
 
-        <div className='header__container'>
-          {props.isLoggedIn ? (<p className='header__user'>{props.useremail}</p>) : ''}
-          <Link to={link} className={classLink} onClick={signOut}>{textLink}</Link>
-        </div>
+        {props.isLoggedIn && props.isMenuOpen && (
+        
+          <div className='header__container header__container_type_burger-menu'>
+            {props.isLoggedIn ? (<p className='header__user'>{props.useremail}</p>) : ''}
+            <Link to={link} className={classLink} onClick={signOut}>{textLink}</Link>
+          </div>)
+        }
+        
+        <header className='header page__header'>
+          <Link className='logo link' to='/'>
+            <img className='header__logo' src={headerLogo} alt="Логотип" />
+          </Link>
+
+          <div className='header__container header__container_type_profile-menu'>
+            {props.isLoggedIn ? (<p className='header__user'>{props.useremail}</p>) : ''}
+            <Link to={link} className={classLink} onClick={signOut}>{textLink}</Link>
+          </div>
+
+          {props.isLoggedIn && <HamburgerButton handleMenuClick={props.handleMenuClick} isMenuOpen={props.isMenuOpen}/>}
 
       </header>
     </>
