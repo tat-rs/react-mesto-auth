@@ -16,6 +16,7 @@ import InfoToolTip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import auth from '../utils/auth';
+import {useScrollLock} from '../hooks/useScrollLock'
 
 function App() {
 
@@ -43,30 +44,37 @@ function App() {
 
   const [isMenuOpen, setMenuOpen] = React.useState(false); //состояние переменной открытия меню
 
+  const {lockScroll, unlockScroll} = useScrollLock(); //скролл и отмена скролла 
+
   const history = useHistory();
   
   //обработчик открытия попапа редактирования аватара профиля
   function handleEditAvatarClick() {
+    lockScroll()
     setIsEditAvatarPopupOpen(true)
   }
 
   //обработчик открытия попапа редактирования профиля
   function handleEditProfileClick() {
+    lockScroll()
     setIsEditProfilePopupOpen(true)
   }
 
   //обработчик открытия попапа добавления новой карточки
   function handleAddPlaceClick() {
+    lockScroll()
     setIsAddPlacePopupOpen(true)
   }
   
   //обработчик клика по карточке
   function handleCardClick(card) {
+    lockScroll()
     setSelectedCard(card)
   }
 
   //обработчик открытия попапа подтверждения удаления карточки
   function handlePopupConfirmationClick() {
+    lockScroll()
     setIsPopupConfirmationOpen(true)
   }
 
@@ -92,6 +100,7 @@ function App() {
     setIsAddPlacePopupOpen(false)
     setSelectedCard({})
     setIsPopupConfirmationOpen(false)
+    unlockScroll()
   }
 
   React.useEffect(() => {
