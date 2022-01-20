@@ -23,3 +23,5 @@
     * Функциональные компоненты;
     * React hooks(useState, useEffect, useRef, useHistory, useLocation);
     * Настройка роутинга(react-router-dom)
+    
+[Ссылка на сайт в GitHub Pages](https://tat-rs.github.io/react-mesto-auth/)
