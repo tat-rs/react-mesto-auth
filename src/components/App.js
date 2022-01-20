@@ -89,7 +89,7 @@ function App() {
   }
 
   function handleMenuClick() {
-    setMenuOpen(!isMenuOpen)
+    setMenuOpen(true)
   }
 
   //сброс состояний переменных
@@ -101,6 +101,7 @@ function App() {
     setSelectedCard({})
     setIsPopupConfirmationOpen(false)
     unlockScroll()
+    setMenuOpen(false)
   }
 
   React.useEffect(() => {
@@ -246,7 +247,7 @@ function App() {
     <div className='page__content'>
       <CurrentUserContext.Provider value={currentUser}>
 
-      <Header isLoggedIn={isLoggedIn} useremail={email} signOutClick={signOutClick} handleMenuClick={handleMenuClick} isMenuOpen={isMenuOpen} />
+      <Header isLoggedIn={isLoggedIn} useremail={email} signOutClick={signOutClick} handleMenuClick={handleMenuClick} closeAllPopups={closeAllPopups} isMenuOpen={isMenuOpen} />
       
         <Switch>
 
