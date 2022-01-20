@@ -89,7 +89,7 @@ function App() {
   }
 
   function handleMenuClick() {
-    setMenuOpen(true)
+    setMenuOpen(!isMenuOpen)
   }
 
   //сброс состояний переменных
