@@ -1,4 +1,4 @@
-# Фронтенд проекта Mesto на React.
+# Фронтенд проекта Mesto на React
 
 ## Описание проекта и его функциональность
 
@@ -23,5 +23,27 @@
     * Функциональные компоненты;
     * React hooks(useState, useEffect, useRef, useHistory, useLocation);
     * Настройка роутинга(react-router-dom)
-    
-[Ссылка на сайт в GitHub Pages](https://tat-rs.github.io/react-mesto-auth/)
+
+## Инструкция
+
+Для работы с проектом необходимо выполнить следующие действия:
+
+__1. Клонировать репозиторий__
+
+`git clone https://github.com/tat-rs/react-mesto-auth.git`
+
+__2. Установить все зависимости__
+
+`npm install`
+
+__3. Запустить проект__
+
+`npm start`
+
+__4. Собрать проект__
+
+`npm run build`
+
+## Ссылка на сайт
+
+<a href="https://tat-rs.github.io/react-mesto-auth/" target="_blank" rel="noopener">Ссылка на GitHub Pages</a>
